@@ -1,0 +1,38 @@
+{
+  "name": "opencode-agent-hints",
+  "version": "0.1.0",
+  "description": "Agent Hint protocol v1 for opencode: X-Agent-Hint on every main-line request plus session lifecycle manage requests",
+  "type": "module",
+  "license": "MulanPSL-2.0",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./server": "./dist/index.js",
+    "./tui": "./dist/tui/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "agent-hint",
+    "kv-cache",
+    "inference"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "bash e2e/run.sh"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.18.32",
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
+}
