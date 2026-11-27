@@ -27,8 +27,14 @@ agent-hint-plugins/opencode-agent-hints/
 
 ## Install
 
+```bash
+# opencode 1.x (V1 plugin API): installs the package and updates the config
+opencode plugin opencode-agent-hints          # add -g for the global config
+```
+
 The plugin has two halves. opencode loads **server** plugins from `opencode.json` and **TUI**
-plugins from `tui.json`, so both files need an entry.
+plugins from `tui.json`. The CLI above writes both entries because the package exports both parts;
+if you wire it by hand, add the `tui.json` entry yourself.
 
 ```jsonc
 // ~/.config/opencode/opencode.json  (or the project's opencode.json)

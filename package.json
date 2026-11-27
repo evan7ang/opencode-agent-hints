@@ -4,6 +4,15 @@
   "description": "Agent Hint protocol v1 for opencode: X-Agent-Hint on every main-line request plus session lifecycle manage requests",
   "type": "module",
   "license": "MulanPSL-2.0",
+  "author": "evan7ang <the404notrain@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evan7ang/opencode-agent-hints.git"
+  },
+  "homepage": "https://github.com/evan7ang/opencode-agent-hints#readme",
+  "bugs": {
+    "url": "https://github.com/evan7ang/opencode-agent-hints/issues"
+  },
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
@@ -21,15 +30,25 @@
     "opencode-plugin",
     "agent-hint",
     "kv-cache",
-    "inference"
+    "inference",
+    "x-agent-hint",
+    "prefix-cache",
+    "llm"
   ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "e2e": "bash e2e/run.sh",
     "hint:watch": "node scripts/hint-watch.mjs",
-    "demo:opencode": "bash scripts/opencode-hint-demo.sh"
+    "demo:opencode": "bash scripts/opencode-hint-demo.sh",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
   "devDependencies": {
     "@opencode-ai/plugin": "^1.18.32",

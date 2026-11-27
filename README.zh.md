@@ -13,8 +13,13 @@
 
 ## 安装
 
-插件分两半。opencode 从 `opencode.json` 加载 **server** 插件，从 `tui.json` 加载 **TUI** 插件，
-所以两个文件都要加。
+```bash
+# opencode 1.x（V1 插件 API）：安装包并更新配置
+opencode plugin opencode-agent-hints          # 加 -g 写入全局配置
+```
+
+插件分两半。opencode 从 `opencode.json` 加载 **server** 插件，从 `tui.json` 加载 **TUI** 插件。
+包同时导出两部分，所以上面的 CLI 会把两个条目都写好；手工接线时记得自己补 `tui.json`。
 
 ```jsonc
 // ~/.config/opencode/opencode.json（或项目里的 opencode.json）
