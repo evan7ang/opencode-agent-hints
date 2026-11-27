@@ -55,14 +55,20 @@
 - `npm pack --dry-run` 校验打包内容（`dist` + 两个 README + LICENSE）。
 - README 增加"从 npm 安装"的 CLI 写法。
 
-### P1 发布到 npm（需要 npm 凭据）
+### P1 发布到 npm（已完成 2026-11-27）
 
-1. `npm publish`（0.1.0，public）。
-2. 干净环境验证：`opencode plugin opencode-agent-hints`，再按 README 配 `opencode.json` + `tui.json`，
-   跑一次 `opencode run`，用 `scripts/hint-watch.mjs` 或 `agent-hint-watcher` 确认头出现。
-3. 打 tag `v0.1.0`，由 release workflow 复现（provenance 需要公开仓库 + OIDC，仓库已 public）。
+1. `npm publish --access public` 用 bypass-2FA granular token 发布 `opencode-agent-hints@0.1.0`。
+   首次发布被 npm 转成“占位版本” `0.0.0-stage`（"Temporary package placeholder for staged publishing"），
+   约 1–2 分钟后公开 packument 转为 `latest=0.1.0`。
+2. 干净环境验证（XDG 目录全部隔离）：
+   - `opencode plugin opencode-agent-hints` 把包安装到 `~/.cache/opencode/packages/...`，
+     并同时写入 `.opencode/opencode.json` 与 `.opencode/tui.json`；
+   - `opencode run` 打脚本上游的抓包：标题请求无 hint，主线 `start`（600s@2，`msg_offset == 2`）、
+     `append`（60s@4，`msg_offset == 4`），退出时 `stop`。
+3. GitHub Actions secret `NPM_TOKEN` 已写入（供 `release.yml` 后续版本使用）。
+4. `release.yml` 加了幂等保护：目标版本已存在时跳过 `npm publish`，因此给已发布版本打 tag 也会是绿的。
 
-验收：npm 页面可见；`npm view opencode-agent-hints` 元数据正确；安装后 e2e A/C 能跑通。
+验收：`npm view opencode-agent-hints version` → `0.1.0`；tarball 可下载；安装后真实 `opencode run` 抓到 hint。
 
 ### P2 V2 双入口（建议在 B 之前完成）
 

@@ -6,6 +6,8 @@
 
 请求体一个字节都不改——hint 只在头里，base64url 编码的 JSON，无填充。
 
+已发布到 npm：[`opencode-agent-hints`](https://www.npmjs.com/package/opencode-agent-hints)。
+
 - 符合性：**L1 + L2 + L3-lite**（焦点驱动的 pause/resume、归档 → stop；草稿信号未实现，
   见[实现画像](docs/implementation-profile.md)）。
 - opencode 基线：**1.18.x**（V1 插件 API，`@opencode-ai/plugin`）。

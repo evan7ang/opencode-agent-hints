@@ -7,6 +7,8 @@ driven with dedicated manage requests (`pause` / `resume` / `stop` / `compact`).
 
 The request body is never touched — the hint is one header, base64url JSON, no padding.
 
+Published on npm as [`opencode-agent-hints`](https://www.npmjs.com/package/opencode-agent-hints).
+
 - Conformance: **L1 + L2 + L3-lite** (focus-driven pause/resume, archive → stop; the draft
   signal is not implemented, see [implementation profile](docs/implementation-profile.md)).
 - opencode baseline: **1.18.x** (V1 plugin API, `@opencode-ai/plugin`).
