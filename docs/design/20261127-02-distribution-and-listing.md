@@ -98,7 +98,28 @@ V2 侧映射（比 V1 更准，见 `20261127-01` §3）：
 
 验收：V1（1.18.32 / 1.19.x）与 V2 各自跑通 A、C、D；README 写清版本矩阵。
 
-### P3 收录
+### P3 收录（进行中）
+
+**官方 Ecosystem PR 已提交**：https://github.com/anomalyco/opencode/pull/66710
+
+- 分支 `evan7ang:ecosystem-agent-hints`，只改 `services/site/src/docs/v1/content/ecosystem.mdx`（+1 行）；
+- `check-standards` / `check-compliance` / `add-contributor-label` 通过；PR 描述已按模板补齐，
+  合规机器人确认 "now meets our contributing guidelines"。
+
+**awesome-opencode：暂不满足门槛，推迟**
+
+- 该列表已改为 `data/plugins/*.yaml` + 生成 README，并有硬性规则：公开可用、90 天内有提交、
+  **至少 25 stars 且仓库满 30 天**、tagline ≤ 120 字符。
+- 本仓库目前 0 star、创建 2 天，现在提会被直接关闭。等满足条件后提交
+  `data/plugins/opencode-agent-hints.yaml`（name / repo / tagline / description，description 里写明
+  支持 V1 与 V2）。
+
+**opencode.cafe：人工提交**
+
+- 站点提交入口是表单 `https://opencode.cafe/submit`（仓库 `R44VC0RP/opencode.cafe` 的
+  CONTRIBUTING 只覆盖代码贡献），需要浏览器操作，留给维护者手动提交。
+
+### P3 附：收录物料
 
 1. **官方 Ecosystem 表**（PR 正文模板）：
 
