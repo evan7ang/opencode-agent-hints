@@ -52,6 +52,26 @@ A local checkout works too: use the absolute path to this directory in both plac
 
 Restart opencode after changing either file.
 
+## Watch hints locally
+
+Launch opencode with an extra config that enables the plugin trace, without touching the
+global config:
+
+```bash
+bash scripts/opencode-hint-demo.sh
+# in another terminal
+npm run hint:watch
+```
+
+- The script writes `$TMPDIR/opencode-agent-hints-demo/opencode.json`, adds only this plugin
+  and `trace.file`, then `exec`s opencode through `OPENCODE_CONFIG`; providers, credentials
+  and existing plugins stay untouched.
+- The trace lands in `$TMPDIR/opencode-agent-hints-demo/trace.jsonl`, one content-free
+  record per ordinary or manage request.
+- `npm run hint:watch` follows that file and prints `state` / `call_index` / `epoch` /
+  `priority` / `cache_control` / manage result plus the exact base64url header.
+  Options: `--file <path>`, `--tail <n>`, `--all`, `--json`, `--once`.
+
 ## What goes on the wire
 
 ```http
@@ -138,3 +158,7 @@ compact → retry with the old epoch, and `stop` on disposal. Captures for phase
 - No draft signal: `resume` fires when the TUI focuses a session, not while typing.
 - opencode 2.x (`Plugin.define`, RPC parts) is not supported yet.
 - Desktop / web clients publish no focus signal, so lifecycle falls back to the headless triggers.
+
+## Upstreaming
+
+Feasibility study and a phased plan for landing this in opencode itself: [`docs/design/20261127-01-upstreaming-opencode.md`](docs/design/20261127-01-upstreaming-opencode.md).

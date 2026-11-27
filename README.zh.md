@@ -36,6 +36,24 @@
 本地开发可以用绝对路径（两个文件里分别写 `["/path/to/opencode-agent-hints", { ... }]` 和
 `"/path/to/opencode-agent-hints"`）。改完配置要重启 opencode。
 
+## 交互观察（本地调试）
+
+不修改全局配置，用额外的 `OPENCODE_CONFIG` 启动 opencode，并打开插件 trace：
+
+```bash
+bash scripts/opencode-hint-demo.sh
+# 另一个终端
+npm run hint:watch
+```
+
+- `scripts/opencode-hint-demo.sh` 生成 `$TMPDIR/opencode-agent-hints-demo/opencode.json`，
+  只追加本插件和 `trace.file`，再 `exec opencode`；全局 provider/凭据/已有插件保持不变。
+- trace 写在 `$TMPDIR/opencode-agent-hints-demo/trace.jsonl`，每行是一条普通或 manage 请求的
+  完整 hint（无请求体、无凭据）。
+- `npm run hint:watch` 默认跟随上面的文件，打印 `state` / `call_index` / `epoch` /
+  `priority` / `cache_control` / manage 结果，以及可直接对照的 base64url header。
+  可选 `--file <path>`、`--tail <n>`、`--all`、`--json`、`--once`。
+
 ## 线上形态
 
 ```http
@@ -117,3 +135,7 @@ headless pause/resume、焦点 pause/resume、溢出 → compact → 重试保�
 - 没有草稿信号：`resume` 在 TUI 聚焦会话时触发，而不是在打字时。
 - 暂不支持 opencode 2.x（`Plugin.define`、RPC part）。
 - Desktop / web 客户端没有焦点信号，生命周期退回 headless 触发源。
+
+## 合入上游
+
+合入 opencode 本体的可行性调研与分阶段方案：[`docs/design/20261127-01-upstreaming-opencode.md`](docs/design/20261127-01-upstreaming-opencode.md)。

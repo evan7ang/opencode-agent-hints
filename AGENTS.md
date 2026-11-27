@@ -19,6 +19,7 @@ src/
 └── tui/index.ts       # TUI part：轮询 route，发送 focus/blur
 tests/                 # vitest（直测 src）
 e2e/                   # 抓包 stub、四个场景、真网关脚本、TUI pty 检查
+scripts/               # 交互观察：trace 跟随、scratch 配置启动
 docs/                  # design/ tasks/ evidence/ 实现画像与符合性清单
 ```
 
@@ -31,6 +32,8 @@ npm run build       # tsc -p tsconfig.build.json → dist/
 bash e2e/run.sh A   # A/B/C/D 或 all
 python3 e2e/tui-check.py
 bash e2e/real-gateway.sh [provider/model]
+npm run hint:watch            # 跟随 trace JSONL，打印 hint 字段
+bash scripts/opencode-hint-demo.sh  # 用额外 OPENCODE_CONFIG 启动交互 opencode
 ```
 
 ## 硬性规则
